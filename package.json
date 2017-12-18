@@ -1,0 +1,35 @@
+{
+  "name": "dashdash-server",
+  "version": "0.0.1",
+  "description": "Server for Galvanize Q3 group project.",
+  "main": "server.js",
+  "scripts": {
+    "test": "none",
+    "start": "node server.js",
+    "knex": "knex"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinUSCU/dashdash-server.git"
+  },
+  "author": "Aldo, Kevin, Stan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinUSCU/dashdash-server/issues"
+  },
+  "homepage": "https://github.com/KevinUSCU/dashdash-server#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "knex": "^0.14.2",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.13.3"
+  }
+}
