@@ -6,7 +6,7 @@ const path = require('path')
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/arrive_dev',
+    connection: 'postgres://localhost/dashdash_dev',
     migrations: {
       directory: path.join(__dirname, 'db', 'migrations')
     },
@@ -17,7 +17,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/arrive_test',
+    connection: 'postgres://localhost/dashdash_test',
     migrations: {
       directory: path.join(__dirname, 'db', 'migrations')
     },
