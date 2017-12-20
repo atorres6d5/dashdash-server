@@ -8,17 +8,17 @@ const morgan = require('morgan')
 const path = require('path')
 const cors = require('cors')
 
-const app = express();
-app.use(bodyParser.json());
+const app = express()
+app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(cors())
 
 
 app.use((req, res) => {
   const status = 404;
-  const message = `Could not ${req.method} ${req.path}`;
-  res.status(status).json({ status, message });
-});
+  const message = `Could not ${req.method} ${req.path}`
+  res.status(status).json({ status, message })
+})
 
 app.use((err, _req, res, _next) => {
   // parse error message
@@ -27,12 +27,12 @@ app.use((err, _req, res, _next) => {
   if (printClientErrorsOnServer) console.error(err)
   // send error to client
   const status = err.status || 500;
-  const message = err.message || 'Something went wrong!';
-  res.status(status).json({ status, message });
-});
+  const message = err.message || 'Something went wrong!'
+  res.status(status).json({ status, message })
+})
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
 app.listen(port, () => {
-  console.log('listening on port', port);
-});
+  console.log('listening on port', port)
+})
