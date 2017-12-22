@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.string('last_name').notNullable().defaultTo('')
     table.string('username').notNullable().defaultTo('')
     table.string('hashed_password').notNullable().defaultTo('')
+    table.enum('role', [ 'admin', 'user' ]).defaultTo('user')
     table.boolean('children').notNullable().defaultTo(false)
     table.boolean('pets').notNullable().defaultTo(false)
     table.timestamps(true, true)
