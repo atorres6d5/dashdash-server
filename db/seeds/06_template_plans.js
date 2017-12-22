@@ -1,13 +1,8 @@
-
 exports.seed = function(knex, Promise) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
-      ]);
-    });
-};
+  return knex('template_plans').insert([
+    { }
+  ])
+  .then(() => {
+    return knex.raw(`SELECT setval('template_plans_id_seq', (SELECT MAX(id) FROM template_plans));`)
+  })
+}
