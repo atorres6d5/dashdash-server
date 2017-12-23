@@ -1,5 +1,5 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('users', (table) => {
+  return knex.schema.createTable('auth', (table) => {
     table.integer('user_id').notNullable()
     table.foreign('user_id').references('users.id').onDelete('CASCADE')
     table.string('hashed_password').notNullable().defaultTo('')
@@ -8,5 +8,5 @@ exports.up = function(knex, Promise) {
 }
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('users')
+  return knex.schema.dropTable('auth')
 }
