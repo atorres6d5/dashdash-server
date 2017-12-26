@@ -5,6 +5,8 @@ function processErrorMessage(err) {
       case 'duplicateUser': return { status: 409, message: 'A user with this email address already exists' }
       case 'invalidPassword': return { status: 401, message: 'Incorrect password' }
       case 'invalidToken': return { status: 401, message: 'A valid authorization token is required' }
+      case 'missingFirstname': return { status: 400, message: 'First name is required' }
+      case 'missingLastname': return { status: 400, message: 'Last name is required' }
       case 'missingPassword': return { status: 400, message: 'A password is required' }
       case 'missingUsername': return { status: 400, message: 'A username is required' }
       case 'noSuchUser': return { status: 404, message: 'This user does not exist' }
