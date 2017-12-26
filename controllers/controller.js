@@ -1,5 +1,5 @@
 module.exports = name => {
-  const Model = require('./models')[`${name}Model`]
+  const Model = require('../models')[`${name}Model`]
 
   class Controller {
     static exists (req, res, next) {
@@ -13,7 +13,7 @@ module.exports = name => {
 
     static index (req, res, next) {
       Model.all()
-      .then(response => res.status(200).json({ [`${name}s`]: users }))
+      .then(response => res.status(200).json({ [`${name}s`]: response }))
       .catch(next)
     }
 
