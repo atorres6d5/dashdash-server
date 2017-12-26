@@ -1,13 +1,11 @@
+const Controller = require('./controller')('Auth') //Auth is the model name
+const { AuthModel, UserModel, TokenModel } = require('../models')
 const bcrypt = require('bcryptjs')
-const {
-  UserModel,
-  TokenModel
- } = require('../models')
 
-class AuthController {
+class AuthController extends Controller {
 
   // Verify requestor is a user (includes admins)
-  static isValidUser (req, res, next) {
+  static isUser (req, res, next) {
     // Validate and decode token
     TokenModel.verifyAndExtractHeaderToken(req.headers)
     .catch(err => { throw new Error('invalidToken') })
@@ -21,7 +19,7 @@ class AuthController {
     .catch(next) // fail auth check
   }
 
-  // Verify requestor is an admin
+  // Verify requestor is specifically an admin
   static isAdmin (req, res, next) {
     // Validate and decode token
     TokenModel.verifyAndExtractHeaderToken(req.headers)
@@ -48,7 +46,7 @@ class AuthController {
     .then(userId => {
       if (!userId) throw new Error('noSuchUser')
       // Get hash from auth database
-      return AuthModel.getHash(id)
+      return AuthModel.find(id)
     })
     .then(result => {
       // Check for supplied password match against stored hash
@@ -63,21 +61,24 @@ class AuthController {
 
   static signup (req, res, next) {
     // *** Signup will create a new user; no token is required, however a token will be returned ***
-    const { username, password } = req.body
+    const { username, password, first_name, last_name } = req.body
     // Verify fields exist
     if (!username) throw new Error('missingUsername')
     if (!password) throw new Error('missingPassword')
+    if (!first_name) throw new Error('missingFirstname')
+    if (!last_name) throw new Error('missingLastname')
     // Verify that username is unique
     UserModel.getUserIdByUsername(username)
     .then(existingUser => {
       if (existingUser) throw new Error('duplicateUser')
       // If unique, add new user to users database; all new users created with role of 'user'
-      return UserModel.create(username)
+      const newUser = { username, first_name, last_name }
+      return UserModel.create(newUser)
     })
-    .then(user => {
+    .then(newUser => {
       // Add hashed password to auth table
       const hashed_password = bcrypt.hashSync(password)
-      return AuthModel.create({ user_id: user.id, hashed_password })
+      return AuthModel.create({ user_id: newUser.id, hashed_password })
     })
     // Sign and return a token for the new user
     .then(result => Token.sign(result.user_id))
