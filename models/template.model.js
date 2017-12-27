@@ -1,8 +1,8 @@
 const db = require('../db/knex')
-const Model = require('./model')('reviews')
+const Model = require('./model')('templates') //templates is the table name
 
-class Template extends Model{
+class TemplateModel extends Model{
     
 }
 
-module.exports = Template
+module.exports = TemplateModel
