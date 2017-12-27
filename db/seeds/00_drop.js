@@ -3,6 +3,7 @@ exports.seed = function(knex, Promise) {
   return knex('reality').del()
     .then(() => knex('items').del())
     .then(() => knex('plans').del())
+    .then(() => knex('badges_users').del())
     .then(() => knex('badges').del())
     .then(() => knex('auth').del())
     .then(() => knex('users').del())
