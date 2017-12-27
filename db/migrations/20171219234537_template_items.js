@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('name').notNullable().defaultTo('')
     table.time('duration').notNullable().defaultTo('00:05:00')
     table.boolean('snoozable').notNullable().defaultTo(false)
-    table.integer('order').unique().defaultTo(null)
+    table.integer('order').defaultTo(null)
     table.timestamps(true, true)
   })
 };
