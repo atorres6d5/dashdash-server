@@ -4,7 +4,6 @@ exports.up = function(knex, Promise) {
     table.string('name').notNullable().defaultTo('')
     table.string('description').notNullable().defaultTo('')
     table.string('image').notNullable().defaultTo('')
-    table.boolean('active').notNullable().defaultTo(true)
     table.timestamps(true, true)
   })
 };
