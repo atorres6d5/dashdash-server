@@ -19,17 +19,7 @@ class UserModel extends Model {
     // note that 'role' is automatically defaulted to 'user' by the db
     .returning(['id'])
   }
-
-  static update (id, first_name, last_name, email, password, role) {
-    let hashed_password
-    if (password) hashed_password = bcrypt.hashSync(password)
-    return db('users')
-      .where({ id })
-      .update({ first_name, last_name, email, hashed_password, role, thisKeyIsSkipped: undefined })
-      .returning(['id'])
-  }
-
-
+  
 }
 
 module.exports = UserModel
