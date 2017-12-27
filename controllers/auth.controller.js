@@ -43,16 +43,16 @@ class AuthController extends Controller {
     if (!password) throw new Error('missingPassword')
     // Retrieve user match from database
     UserModel.getUserIdByUsername(username)
-    .then(userId => {
-      if (!userId) throw new Error('noSuchUser')
+    .then(result => {
+      if (!result) throw new Error('noSuchUser')
       // Get hash from auth database
-      return AuthModel.find(id)
+      return AuthModel.find(result.id)
     })
     .then(result => {
       // Check for supplied password match against stored hash
       if (!bcrypt.compareSync(password, result.hashed_password)) throw new Error('invalidPassword')
       // Sign new token with user id
-      return Token.sign(result.user_id)
+      return TokenModel.sign(result.user_id)
     })
     // Return token to client
     .then(token => res.status(201).json({ auth: token }))
@@ -81,11 +81,25 @@ class AuthController extends Controller {
       return AuthModel.create({ user_id: newUser.id, hashed_password })
     })
     // Sign and return a token for the new user
-    .then(result => Token.sign(result.user_id))
+    .then(result => TokenModel.sign(result.user_id))
     // Return token to client
     .then(token => res.status(201).json({ auth: token }))
     .catch(next)
   }
+
+  static updatePassword (req, res, next) {
+    const { password } = req.body
+    if (!password) throw new Error('missingPassword')
+    const hashed_password = bcrypt.hashSync(password)
+    // Validate and decode token
+    TokenModel.verifyAndExtractHeaderToken(req.headers)
+    .catch(err => { throw new Error('invalidToken') })
+    // Update password in database based on user id in token
+    .then(token => AuthModel.update(token.sub.id, { hashed_password }))
+    .then(result => res.status(200).json({ auth: result.user_id }))
+    .catch(next)
+  }
+
 }
 
 module.exports = AuthController
