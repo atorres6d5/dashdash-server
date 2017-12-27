@@ -16,11 +16,13 @@ app.use(cors())
 const {
   AuthRouter,
   UsersRouter,
-//  TemplatesRouter,
-//  BadgesRouter
+  TemplatesRouter,
+  BadgesRouter
 } = require('./routes')
 app.use('/api/auth', AuthRouter)
 app.use('/api/users', UsersRouter)
+app.use('/api/badges', BadgesRouter)
+app.use('/api/templates', TemplatesRouter)
 
 app.use((req, res) => {
   const status = 404;
