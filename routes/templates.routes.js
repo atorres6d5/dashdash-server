@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const [TemplatesController] = require(`../controllers/`)
+const { TemplatesController } = require('../controllers')
 // const AuthController = require(`../controllers/auth.js`)
 
 router.get('/', TemplatesController.getTemplates)

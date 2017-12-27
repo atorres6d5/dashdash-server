@@ -1,5 +1,5 @@
 module.exports = name => {
-  const Model = require('./models')[`${name}Model`]
+  const Model = require('../models')[`${name}Model`]
 
   class Controller {
     static exists (req, res, next) {
@@ -13,14 +13,14 @@ module.exports = name => {
 
     static index (req, res, next) {
       Model.all()
-      .then(response => res.status(200).json({ [`${name}s`]: users }))
+      .then(response => res.status(200).json({ [`${name}s`]: response }))
       .catch(next)
     }
 
     static show (req, res, next) {
       Model.find(req.params.id)
       .then(response => {
-        if (!response) throw new Error(`noSuch${name}`) // might be redundant if using exists first in route chain
+        if (!response) throw new Error(`noSuch${name}`) // might be redundant if using 'exists' first in route chain
         return res.status(200).json({ [name]: response })
       })
       .catch(next)
