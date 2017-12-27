@@ -20,7 +20,7 @@ module.exports = name => {
     static show (req, res, next) {
       Model.find(req.params.id)
       .then(response => {
-        if (!response) throw new Error(`noSuch${name}`) // might be redundant if using exists first in route chain
+        if (!response) throw new Error(`noSuch${name}`) // might be redundant if using 'exists' first in route chain
         return res.status(200).json({ [name]: response })
       })
       .catch(next)
