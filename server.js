@@ -15,12 +15,14 @@ app.use(cors())
 
 const {
   AuthRouter,
-  UsersRouter,
+  BadgesRouter,
+  PlansRouter,
   TemplatesRouter,
-  BadgesRouter
+  UsersRouter
 } = require('./routes')
 app.use('/api/auth', AuthRouter)
 app.use('/api/users', UsersRouter)
+app.use('/api/plans', PlansRouter)
 app.use('/api/badges', BadgesRouter)
 app.use('/api/templates', TemplatesRouter)
 
