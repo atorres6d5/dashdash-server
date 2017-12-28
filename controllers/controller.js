@@ -18,7 +18,7 @@ module.exports = name => {
     }
 
     static show (req, res, next) {
-      if (typeof req.params.id !== 'number') throw new Error(`noSuchRoute`) // catch malformed join routes
+      if (!Number(req.params.id)) throw new Error(`noSuchRoute`) // catch malformed join routes
       Model.find(req.params.id)
       .then(response => {
         if (!response) throw new Error(`noSuch${name}`) // might be redundant if using 'exists' first in route chain
