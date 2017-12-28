@@ -3,6 +3,12 @@ const { BadgeModel } = require('../models')
 
 class BadgesController extends Controller {
 
+  static showAllForUser (req, res, next) {
+    BadgeModel.findForUser(req.params.userId)
+    .then(response => res.status(200).json({ badges: response }))
+    .catch(next)
+  }
+
 }
 
 module.exports = BadgesController

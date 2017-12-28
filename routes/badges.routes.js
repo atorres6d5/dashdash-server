@@ -3,6 +3,7 @@ const { BadgesController } = require(`../controllers`)
 // const [AuthController] = require(`../controllers/`)
 
 router.get('/', BadgesController.index)
+router.get('/user/:userId', BadgesController.showAllForUser)
 router.get('/:id', BadgesController.show)
 
 module.exports = router
