@@ -12,11 +12,12 @@ function processErrorMessage(err) {
       case 'missingPassword': return { status: 400, message: 'A password is required' }
       case 'missingRole': return { status: 400, message: 'Role attribute is required'}
       case 'missingUsername': return { status: 400, message: 'A username is required' }
-      case 'noSuchUser': return { status: 404, message: 'This user does not exist' }
-      case 'noSuchTemplate': return { status: 404, message: 'This template does not exist' }
-      case 'noSuchPlan': return { status: 404, message: 'This plan does not exist' }
-      case 'noSuchItem': return { status: 404, message: 'This item does not exist' }
       case 'noSuchBadge': return { status: 404, message: 'This badge does not exist' }
+      case 'noSuchItem': return { status: 404, message: 'This item does not exist' }
+      case 'noSuchPlan': return { status: 404, message: 'This plan does not exist' }
+      case 'noSuchRoute': return { status: 404, message: 'This is not a valid route' }
+      case 'noSuchTemplate': return { status: 404, message: 'This template does not exist' }
+      case 'noSuchUser': return { status: 404, message: 'This user does not exist' }
       case 'requestorInvalid': return { status: 401, message: 'Requestor is not a valid user' }
       case 'unauthorizedUser': return { status: 401, message: 'User is not authorized to access this resource' }
       default:
