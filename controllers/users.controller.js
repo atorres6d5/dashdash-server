@@ -21,17 +21,17 @@ class UsersController extends Controller {
     // *** Editing profile data can only be done by the user whose id we are updating ***
     // Role and password cannot be updated in this way
     const id = Number(req.params.id)
-    const { username, first_name, last_name, children, pets } = req.body
+    const { email, first_name, last_name, children, pets } = req.body
     // Note we are stripping out any non-changeable fields
-    const updatedUser = { username, first_name, last_name, children, pets }
+    const updatedUser = { email, first_name, last_name, children, pets }
     // Verify user owns profile being updated by checking route against header token
     TokenModel.verifyAndExtractHeaderToken(req.headers)
     .catch(err => { throw new Error('invalidToken') })
     .then(token => {
       if (token.sub.id !== id) throw new Error('unauthorizedUser')
-      // If username was changed, verify no duplicates
-      if (username) {
-        UserModel.getUserIdByUsername(username)
+      // If email was changed, verify no duplicates
+      if (email) {
+        UserModel.getUserIdByEmail(email)
         .then(existingUser => {
           if (existingUser) throw new Error('duplicateUser')
         })

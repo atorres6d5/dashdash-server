@@ -4,10 +4,10 @@ const bcrypt = require('bcryptjs')
 
 class UserModel extends Model {
   
-  static getUserIdByUsername (username) {
+  static getUserIdByEmail (email) {
     return db('users')
     .select('id')
-    .where({ username })
+    .where({ email })
     .first()
   }
   

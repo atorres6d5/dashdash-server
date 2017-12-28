@@ -7,11 +7,11 @@ function processErrorMessage(err) {
       case 'incorrectRoleType': return { status: 400, message: "Role attribute must be either 'admin' or 'user'" }
       case 'invalidPassword': return { status: 401, message: 'Incorrect password' }
       case 'invalidToken': return { status: 401, message: 'A valid authorization token is required' }
+      case 'missingEmail': return { status: 400, message: 'An email address is required' }
       case 'missingFirstname': return { status: 400, message: 'First name is required' }
       case 'missingLastname': return { status: 400, message: 'Last name is required' }
       case 'missingPassword': return { status: 400, message: 'A password is required' }
       case 'missingRole': return { status: 400, message: 'Role attribute is required'}
-      case 'missingUsername': return { status: 400, message: 'A username is required' }
       case 'noSuchBadge': return { status: 404, message: 'This badge does not exist' }
       case 'noSuchItem': return { status: 404, message: 'This item does not exist' }
       case 'noSuchPlan': return { status: 404, message: 'This plan does not exist' }

@@ -57,13 +57,13 @@ class AuthController extends Controller {
   }
 
   static login (req, res, next) {
-    // *** Login requires username and password (no token), and will return a token ***
-    // Get supplied username and password and grab user match from db
-    const { username, password } = req.body
-    if (!username) throw new Error('missingUsername')
+    // *** Login requires email and password (no token), and will return a token ***
+    // Get supplied email and password and grab user match from db
+    const { email, password } = req.body
+    if (!email) throw new Error('missingEmail')
     if (!password) throw new Error('missingPassword')
     // Retrieve user match from database
-    UserModel.getUserIdByUsername(username)
+    UserModel.getUserIdByEmail(email)
     .then(result => {
       if (!result) throw new Error('noSuchUser')
       // Get hash from auth database
@@ -82,18 +82,18 @@ class AuthController extends Controller {
 
   static signup (req, res, next) {
     // *** Signup will create a new user; no token is required, however a token will be returned ***
-    const { username, password, first_name, last_name } = req.body
+    const { email, password, first_name, last_name } = req.body
     // Verify fields exist
-    if (!username) throw new Error('missingUsername')
+    if (!email) throw new Error('missingEmail')
     if (!password) throw new Error('missingPassword')
     if (!first_name) throw new Error('missingFirstname')
     if (!last_name) throw new Error('missingLastname')
-    // Verify that username is unique
-    UserModel.getUserIdByUsername(username)
+    // Verify that email is unique
+    UserModel.getUserIdByEmail(email)
     .then(existingUser => {
       if (existingUser) throw new Error('duplicateUser')
       // If unique, add new user to users database; all new users created with role of 'user'
-      const newUser = { username, first_name, last_name }
+      const newUser = { email, first_name, last_name }
       return UserModel.create(newUser)
     })
     .then(newUser => {
