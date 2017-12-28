@@ -13,6 +13,9 @@ router.get('/user/:userId', AuthController.isThisUser, PlansController.index)
 // Get a specific plan for a user (token must match user)
 router.get('/:id/user/:userId', AuthController.isThisUser, PlansController.show)
 
+// Get all items for a plan for a user (token must match user)
+router.get('/:id/user/:userId/items/', AuthController.isThisUser, PlansController.getPlanItems)
+
 // Create plan for a user (token must match user)
 router.post('/user/:userId', AuthController.isThisUser, PlansController.create)
 
