@@ -1,7 +1,9 @@
 module.exports = {
-    UsersModel: require('./users.model.js'),
-    TemplateModel: require('./templates.model.js'),
-    BadgesModel: require('./badges.model.js'),
     AuthModel: require('./auth.model.js'),
-    ErrorModel: require('./error.model.js')
+    BadgeModel: require('./badge.model.js'),
+    ErrorModel: require('./error.model.js'),
+    PlanModel: require('./plan.model.js'),
+    TemplateModel: require('./template.model.js'),
+    TokenModel: require('./token.model'),
+    UserModel: require('./user.model.js')
 }

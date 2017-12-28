@@ -14,12 +14,17 @@ app.use(morgan('dev'))
 app.use(cors())
 
 const {
-  UsersRouter: users,
-  TemplatesRouter: reviews,
-  BadgesRouter: badges,
-  AuthRouter: auth
+  AuthRouter,
+  BadgesRouter,
+  PlansRouter,
+  TemplatesRouter,
+  UsersRouter
 } = require('./routes')
-
+app.use('/api/auth', AuthRouter)
+app.use('/api/users', UsersRouter)
+app.use('/api/plans', PlansRouter)
+app.use('/api/badges', BadgesRouter)
+app.use('/api/templates', TemplatesRouter)
 
 app.use((req, res) => {
   const status = 404;
