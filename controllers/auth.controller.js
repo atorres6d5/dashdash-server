@@ -1,5 +1,5 @@
 const Controller = require('./controller')('Auth') //Auth is the model name
-const { AuthModel, UserModel, TokenModel } = require('../models')
+const { AuthModel, UserModel, TokenModel, PlanModel } = require('../models')
 const bcrypt = require('bcryptjs')
 
 class AuthController extends Controller {
@@ -30,6 +30,27 @@ class AuthController extends Controller {
     .then(user => {
       if (!user) throw new Error('requestorInvalid')
       if (user.role !== 'admin') throw new Error('unauthorizedUser')
+      next() // pass auth check
+    })
+    .catch(next) // fail auth check
+  }
+
+  static ownsThisPlan (req, res, next) {
+    // Validate and decode token
+    TokenModel.verifyAndExtractHeaderToken(req.headers)
+    .catch(err => { throw new Error('invalidToken') })
+    // Check for and retrieve user from database
+    // Get plan id from req and retrieve plan
+    .then(token => {
+      const promises = [ UserModel.find(token.sub.id), PlanModel.find(req.params.id) ]
+      return Promise.all(promises)
+    })
+    // Verify user against plan
+    .then(results => {
+      const userId = results[0].id
+      const planOwner = results[1].user_id
+      if (!userId) throw new Error('requestorInvalid')
+      if (userId !== planOwner) throw new Error('unauthorizedUser')
       next() // pass auth check
     })
     .catch(next) // fail auth check
