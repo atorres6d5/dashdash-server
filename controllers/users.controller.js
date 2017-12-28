@@ -12,7 +12,7 @@ class UsersController extends Controller {
     .then(token => UserModel.find(token.sub.id))
     .then(result => {
       if (!result) throw new Error('noSuchUser')
-      return res.status(200).json({ user: result })
+      return res.status(200).json({ User: result })
     })
     .catch(next)
   }
@@ -37,12 +37,12 @@ class UsersController extends Controller {
         })
         // Update user profile with supplied data
         .then(() => UserModel.update(id, updatedUser))
-        .then(result => res.status(200).json({ user: result }))
+        .then(result => res.status(200).json({ User: result }))
         .catch(next)
       } else {
         // Update user profile with supplied data
         UserModel.update(id, updatedUser)
-        .then(result => res.status(200).json({ user: result }))
+        .then(result => res.status(200).json({ User: result }))
         .catch(next)
       }
     })
@@ -59,7 +59,7 @@ class UsersController extends Controller {
     UserModel.update(id, { role })
     .then(result => {
       if (!result) throw new Error('noSuchUser')
-      return res.status(200).json({ user: result })
+      return res.status(200).json({ User: result })
     })
     .catch(next)
   }
