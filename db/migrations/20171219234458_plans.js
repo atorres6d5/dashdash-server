@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
     table.integer('successes').notNullable().defaultTo(0)
     table.integer('runs').notNullable().defaultTo(0)
     table.time('start_time').notNullable().defaultTo('12:00:00')
+    table.time('deadline').notNullable().defaultTo('00:30:00')
     table.string('days_to_run').notNullable().defaultTo('SUN,MON,TUE,WED,THU,FRI,SAT')
     table.integer('parent_plan').defaultTo(null)
     table.timestamps(true, true)
