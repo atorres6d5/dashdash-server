@@ -93,7 +93,7 @@ class AuthController extends Controller {
       return TokenModel.sign(result.user_id)
     })
     // Return token to client
-    .then(token => res.status(201).json({ auth: token }))
+    .then(token => res.status(201).json({ Auth: token }))
     .catch(next)
   }
 
@@ -121,7 +121,7 @@ class AuthController extends Controller {
     // Sign and return a token for the new user
     .then(result => TokenModel.sign(result.user_id))
     // Return token to client
-    .then(token => res.status(201).json({ auth: token }))
+    .then(token => res.status(201).json({ Auth: token }))
     .catch(next)
   }
 
@@ -134,7 +134,7 @@ class AuthController extends Controller {
     .catch(err => { throw new Error('invalidToken') })
     // Update password in database based on user id in token
     .then(token => AuthModel.update(token.sub.id, { hashed_password }))
-    .then(result => res.status(200).json({ auth: result.user_id }))
+    .then(result => res.status(200).json({ Auth: result.user_id }))
     .catch(next)
   }
 
