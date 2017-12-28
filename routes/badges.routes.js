@@ -1,9 +1,13 @@
 const router = require('express').Router()
-const { BadgesController } = require(`../controllers`)
-// const [AuthController] = require(`../controllers/`)
+const { AuthController, BadgesController } = require(`../controllers`)
 
+// Get all badges (not protected)
 router.get('/', BadgesController.index)
-router.get('/user/:userId', BadgesController.showAllForUser)
+
+// Get one badge (not protected)
 router.get('/:id', BadgesController.show)
+
+// Get all badges for a user (requires token)
+router.get('/user/:userId', AuthController.isThisUser, BadgesController.showAllForUser)
 
 module.exports = router
