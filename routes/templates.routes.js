@@ -4,5 +4,7 @@ const { TemplatesController } = require('../controllers')
 
 router.get('/', TemplatesController.index)
 router.get('/:id', TemplatesController.show)
+// Get all items for a template
+router.get('/:id/items/', TemplatesController.getPlanItems)
 
 module.exports = router
