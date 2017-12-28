@@ -7,7 +7,6 @@ exports.seed = function(knex, Promise) {
     { user_id: 3, badge_id: 1 },
     { user_id: 3, badge_id: 5 },
     { user_id: 3, badge_id: 4 },
-    { user_id: 4, badge_id: 1 },
-    { user_id: 5, badge_id: 1 }
+    { user_id: 4, badge_id: 1 }
   ])
 }
