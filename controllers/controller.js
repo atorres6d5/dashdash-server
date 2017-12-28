@@ -12,14 +12,14 @@ module.exports = name => {
     }
 
     static index (req, res, next) {
-      Model.all()
+      Model.all(req.params.userId)
       .then(response => res.status(200).json({ [`${name}s`]: response }))
       .catch(next)
     }
 
     static show (req, res, next) {
       if (!Number(req.params.id)) throw new Error(`noSuchRoute`) // catch malformed join routes
-      Model.find(req.params.id)
+      Model.find(req.params.id, req.params.userId)
       .then(response => {
         if (!response) throw new Error(`noSuch${name}`) // might be redundant if using 'exists' first in route chain
         return res.status(200).json({ [name]: response })
@@ -28,19 +28,19 @@ module.exports = name => {
     }
 
     static create (req, res, next) {
-      Model.create(req.body)
+      Model.create(req.body, req.params.userId)
       .then(response => res.status(201).json({ [name]: response }))
       .catch(next)
     }
 
     static update (req, res, next) {
-      Model.update(req.params.id, req.body)
+      Model.update(req.params.id, req.body, req.params.userId)
       .then(response => res.status(200).json({ [name]: response }))
       .catch(next)
     }
 
     static destroy (req, res, next) {
-      Model.destroy(req.params.id)
+      Model.destroy(req.params.id, req.params.userId)
       .then(response => res.status(204).json()) //there is no response body with 204
       .catch(next)
     }
