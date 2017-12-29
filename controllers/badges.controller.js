@@ -5,7 +5,7 @@ class BadgesController extends Controller {
 
   static showAllForUser (req, res, next) {
     BadgeModel.findForUser(req.params.userId)
-    .then(response => res.status(200).json({ badges: response }))
+    .then(response => res.status(200).json({ Badges: response }))
     .catch(next)
   }
 
