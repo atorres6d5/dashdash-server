@@ -10,15 +10,21 @@ class PlansController extends Controller {
   }
 
   static createPlanItem (req, res, next) {
-
+    PlanModel.createPlanItem(req.body, req.params.id)
+    .then(response => res.status(201).json({ Item: response }))
+    .catch(next)
   }
 
-  static updatePlanItems (req, res, next) {
-
+  static updatePlanItem (req, res, next) {
+    PlanModel.updatePlanItem(req.params.id, req.body, req.params.itemId)
+      .then(response => res.status(200).json({ Item: response }))
+      .catch(next)
   }
 
-  static deletePlanItem (req, res, next) {
-
+  static destroyPlanItem (req, res, next) {
+    PlanModel.destroyPlanItem(req.params.id, req.params.itemId)
+      .then(response => res.status(204).json()) //there is no response body with 204
+      .catch(next)
   }
 
 }
