@@ -120,7 +120,7 @@ exports.seed = function(knex, Promise) {
       skippable: true,
       order: null
     }, {
-      id: 28,
+      id: 18,
       template_plan_id: 3,
       name: 'Wake up Kids',
       duration: 5,
