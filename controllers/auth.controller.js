@@ -101,10 +101,10 @@ class AuthController extends Controller {
     // *** Signup will create a new user; no token is required, however a token will be returned ***
     const { email, password, first_name, last_name } = req.body
     // Verify fields exist
-    if (!email) throw new Error('missingEmail')
-    if (!password) throw new Error('missingPassword')
     if (!first_name) throw new Error('missingFirstname')
     if (!last_name) throw new Error('missingLastname')
+    if (!email) throw new Error('missingEmail')
+    if (!password) throw new Error('missingPassword')
     // Verify that email is unique
     UserModel.getUserIdByEmail(email)
     .then(existingUser => {
