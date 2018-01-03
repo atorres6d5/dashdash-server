@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.string('name').notNullable().defaultTo('')
     table.string('description').notNullable().defaultTo('')
+    table.enu('type', [ 'weekday', 'weekend' ]).defaultTo('weekday')
     table.timestamps(true, true)
   })
 };
