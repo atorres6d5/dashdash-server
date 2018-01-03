@@ -93,7 +93,7 @@ class AuthController extends Controller {
       return TokenModel.sign(result.user_id)
     })
     // Return token to client
-    .then(token => res.status(201).json({ Auth: token }))
+    .then(token => res.status(200).json({ Auth: token }))
     .catch(next)
   }
 
