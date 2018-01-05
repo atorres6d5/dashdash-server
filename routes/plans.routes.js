@@ -24,7 +24,7 @@ router.get('/:id/users/:userId', AuthController.isThisUser, PlansController.show
 
 // Get all items for a plan for a user (token must match user)
 // requires a token for the user
-// returns a key/value object with an array of objects { Items: [{}, {}] }
+// returns a key/value object with an array of objects { Items: [{}, {}] } in order
 router.get('/:id/users/:userId/items/', AuthController.isThisUser, PlansController.getPlanItems)
 
 
