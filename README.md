@@ -27,4 +27,5 @@ When a token is required for a route, it follows the following format:
     (please note this is not an actual token)
 
 ## Next Steps
-- [ ] Split sensitive user data (ie. hashed_passwords) into it's own table to further protect data.
+- [x] Split sensitive user data (ie. hashed_passwords) into it's own table to further protect data.
+- [ ] Build routes to save user badges.
